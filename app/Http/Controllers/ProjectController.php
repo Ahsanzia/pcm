@@ -14,10 +14,6 @@ class ProjectController extends Controller
     //
 
  public function add_update(Request $request){ 
-
-		
-
-
  	$validator = Validator::make($request->all(), 
 		[   
 			'name' => 'required', 
@@ -30,7 +26,6 @@ class ProjectController extends Controller
 	 $inputtmp = $request->all();
 	 $input['name'] = $inputtmp['name'];
 	 $input['description'] = $inputtmp['description'];
-	 
  	 $project = Project::create($input); 
  	 $input_project['project_id'] = $project->id;
  	 $input_project['user_id'] = $user->id;
@@ -38,5 +33,12 @@ class ProjectController extends Controller
  	 $user_project = user_project::create($input_project);  	 
  	 return response()->json(['error'=>$validator->errors()], 200); 
  }  
+
+ public function get_proj(){ 
+ 	 return response()->json(['project'=>Project::orderBy('id','DESC')->get()], 200); 
+ }  
+ 
+
+
 
 }

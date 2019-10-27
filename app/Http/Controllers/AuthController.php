@@ -18,6 +18,7 @@ class AuthController extends Controller
  		{ 
  			$user = Auth::user(); 
  			$success['token'] = $user->createToken('pcm')-> accessToken; 
+ 			$success['status'] = 1; # working
  			return response()->json(['success' => $success], 200); } 
  			else{ 
  				return response()->json(['error'=>'Unauthorised'], 401); 
@@ -37,14 +38,20 @@ public function register(Request $request) {
 	if ($validator->fails()){ 
 		return response()->json(['error'=>$validator->errors()], 401); 
 	} 
+
 	$input = $request->all(); 
 	$input['password'] = bcrypt($input['password']); 
-	$user = User::create($input); 
-	$success['token'] = $user->createToken('pcm')-> accessToken; 
-	$success['name'] = $user->name; 
-	return response()->json(['success'=>$success], 200); 
-	}	
+	$user = User::where([['email','=',$input['email']],])->count();	
+	if($user > 0 ){
+		return response()->json(['success'=> -1 ], 200); 
+	}else{
+		$user = User::create($input); 
+		$success['token'] = $user->createToken('pcm')-> accessToken; 
+		$success['name'] = $user->name; 
+		return response()->json(['success'=>$success], 200); 
 
+		}
+	}
  }
 
 

@@ -35,7 +35,15 @@ class ProjectController extends Controller
  }  
 
  public function get_proj(){ 
- 	 return response()->json(['project'=>Project::orderBy('id','DESC')->get()], 200); 
+ 	 $user = Auth::user(); 
+
+$projects = 
+       ->join('state', 'state.state_id', '=', 'city.state_id')
+       ->join('country', 'country.country_id', '=', 'state.country_id')
+       ->select('country.country_name', 'state.state_name', 'city.city_name')
+       ->get();
+
+ 	 return response()->json(['project'=>Project::where([['user_id' , '=' , $user->id]])->orderBy('id','DESC')->get()], 200); 
  }  
  
 

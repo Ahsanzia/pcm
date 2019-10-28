@@ -25,14 +25,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::middleware('auth:api')->group(function () {
-
+  //PROJECT
        Route::post('project-add', 'ProjectController@addProj');
        Route::post('project-save', 'ProjectController@saveProj');
        Route::get('getProjects', 'ProjectController@getProjects');
        Route::get('getProject/{id}', 'ProjectController@getProject');
-   
-
-
+  //Project Resources   
+       Route::get('getTeamMembers/{id}', 'ProjectController@getTeamMembers');
+       Route::post('addUpdateTeamMembers', 'ProjectController@addUpdateTeamMembers');
+  
 
 /*    Route::post('activate', 'PassportController@activate')->middleware('log');
     

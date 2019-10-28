@@ -33,6 +33,13 @@ class ProjectController extends Controller
  	 $user_project = user_project::create($input_project);  
  	 return response()->json(['error'=>$validator->errors() , 'project_id' => $project->id], 200);  
  }
+public function addUpdateTeamMembers(Request $request){ 
+
+ 	 return response()->json('', 200);  
+ }
+
+ 
+
 
 
  public function saveProj(Request $request){ 
@@ -82,8 +89,17 @@ class ProjectController extends Controller
      foreach ($user_projects as $project) {
  	 	$pro = project::where([['id' , '=' ,  $project['project_id']]])->first();
  	 }
- 	 return response()->json($pro, 200); 
- }  
+ 		 return response()->json($pro, 200); 
+ }
+
+	public function getTeamMembers($id){
+
+ 	 
+ 		 return response()->json('', 200); 
+	} 
+ 
+ 
+
 
 
 }

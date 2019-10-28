@@ -26,9 +26,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('auth:api')->group(function () {
 
-      Route::post('project', 'ProjectController@add_update');
-
-       Route::get('project', 'ProjectController@get_proj');
+       Route::post('project-add', 'ProjectController@addProj');
+       Route::post('project-save', 'ProjectController@saveProj');
+       Route::get('getProject', 'ProjectController@getProject');
    
 
 

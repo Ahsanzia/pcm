@@ -28,9 +28,9 @@ Route::middleware('auth:api')->group(function () {
 
        Route::post('project-add', 'ProjectController@addProj');
        Route::post('project-save', 'ProjectController@saveProj');
-       Route::get('getProject', 'ProjectController@getProject');
+       Route::get('getProjects', 'ProjectController@getProjects');
+       Route::get('getProject/{id}', 'ProjectController@getProject');
    
-
 
 
 
